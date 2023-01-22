@@ -35,10 +35,13 @@ def create_sample(fields:dict):
 
 def create_samples(field_dict:dict, n_samples:int, file_name:str):
     fields = list(field_dict.keys())
+    fields.insert(0, "id")
     rows = []
     
-    for _ in range(n_samples):
-        rows.append(create_sample(field_dict))
+    for i in range(n_samples):
+        sample = create_sample(field_dict)
+        sample.insert(0, i)
+        rows.append(sample)
 
     with open(file_name, "w") as f:
         writer = csv.writer(f)
